@@ -49,5 +49,15 @@
     <a class="section-link" href="/non-blocking">Non Blocking</a>
     <a class="section-link" href="/performance">Performance</a>
   </div>
+  <script>
+    if (window.location.hostname.indexOf('github') > -1) {
+      window.document.querySelectorAll('.section-link')
+        .forEach((element) => {
+          const prevHref = element.getAttribute('href')
+          const nextHref = '/web-worker' + prevHref
+          element.setAttribute('href', nextHref)
+        })
+    }
+  </script>
 </body>
 </html>
