@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Awesome Filtering App!</title>
+  <link rel="stylesheet" href="anim.css">
+  <style>
+    .WIP {
+      position: fixed;
+      z-index: 1000;
+      height: 100vh;
+      width: 100vw;
+      background: green;
+      text-align: center;
+    }
+    .WIP-title {
+      font-size: 7rem;
+    }
+    .WIP-emoji {
+      font-family: sans-serif;
+      font-weight: 100;
+      font-size: 10rem;
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="WIP">
+    <h1 class="WIP-title">Work In Progress</h1>
+    <p class="WIP-emoji">=)</p>
+  </div>
+  <h1 class="title">Awesome Filtering App!</h1>
+  <div class="search-container">
+    <input type="text" class="js-searchbox searchbox"
+    oninput="search(this.value.toLocaleLowerCase())">
+    <input type="checkbox" name="worker-filter" id="worker-filter">
+    <label for="worker-filter" onchange="workerFilter = this.value">
+      Filter by Worker </label>
+  </div>
+  <div class="animated"></div>
+  <div class="js-output output-list"></div>
+  <script src="people.js"></script>
+  <script src="search.js"></script>
+  <script>
+    // DECLARATIVE CODE
+    let workerFilter = true
+    let query
+    const TAKE = 15
+    const worker = new Worker('worker.js')
+    const output = document.querySelector('.js-output')
+    
+    if (workerFilter) {
+      worker.addEventListener('message', onWorkerResponse)
+    }
+
+    const workerFilterToggle = document.querySelector('#worker-filter')
+    workerFilterToggle.checked = workerFilter
+    workerFilterToggle.addEventListener('change', updateWorkerFilterState)
+
+    search('')
+    
+    // IMPLEMENTATION DETAILS
+    function search (_query) {
+      query = _query
+
+      if (!workerFilter) {
+        // console.time('search')
+        const results = searchPeople(query)
+        // console.timeEnd('search')
+        updateDOM(results.slice(0, TAKE))
+      } else {
+        queryWorker(query)
+      }
+    }
+    
+    function queryWorker (query) {
+      worker.postMessage({query, TAKE})
+    }
+
+    function onWorkerResponse ({data}) {
+      updateDOM(data)
+    }
+
+    function updateWorkerFilterState (event) {
+      workerFilter = event.target.checked
+    }
+    // DOM MANIPULATION
+    function updateDOM (results) {
+      const nodes = results.map(createNode)
+      clearResults()
+      nodes.map(node => output.appendChild(node))
+    }
+    function createNode ({name, email}) {
+      const container = document.createElement('p')
+      
+      const _name = document.createElement('span')
+      _name.textContent = name + ' - '
+      const _email = document.createElement('span')
+      _email.textContent = email
+      // const _gender = document.createElement('span')
+      // _gender.textContent = gender
+
+      container.appendChild(_name)
+      container.appendChild(_email)
+      // container.appendChild(_gender)
+
+      return container
+    }
+    function clearResults () {
+      while (output.firstChild) {
+        output.removeChild(output.firstChild)
+      }
+    }
+  </script>
+</body>
+
+</html>

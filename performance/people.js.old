@@ -1,0 +1,17 @@
+window.people = [
+  {
+    "name": "Cedric",
+    "gender": "male",
+    "age": 44
+  },
+  {
+    "name": "David",
+    "gender": "male",
+    "age": 99
+  },
+  {
+    "name": "Sandeep",
+    "gender": "male",
+    "age": 88
+  }
+]
