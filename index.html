@@ -22,12 +22,20 @@
       display: flex;
       flex-flow: row wrap;
       justify-content: center;
-      align-items: center;
-      width: 50%;
-      height: 50%;
+      align-items: flex-start;
       margin: auto;
+      width: 50%;
+      height: 35%;
+      position: relative;
+      top: -5rem;
     }
-
+    .page-title {
+      width: 100%;
+      margin: 0 auto 0 auto;
+      font-size: 6rem;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      text-align: center;
+    }
     .section-link {
       font-size: 3rem;
       padding: 0 1rem;
@@ -37,6 +45,7 @@
 </head>
 <body>
   <div class="container">
+    <h1 class="page-title">Web Worker Demos</h1>
     <a class="section-link" href="/non-blocking">Non Blocking</a>
     <a class="section-link" href="/performance">Performance</a>
   </div>
