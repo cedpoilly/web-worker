@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Awesome Fibonacci Calculator!</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <div class="app">
+    <h1 class="title">Swiss Army Knife</h1>
+
+    <div class="animated"></div>
+
+    <div class="actions">
+      <button class="js-calc-button-fibonacci calc-button">Fibonacci</button>
+      <button class="js-calc-button-sun calc-button">Sun</button>
+      <button class="js-calc-button-expensive calc-button">Expensive Work</button>
+    </div>
+
+    <label for="calc-output">Result</label>
+    <p name="calc-output" class="calc-output js-output">Let's GO!</p>
+  </div>
+  <script src="algorithms.js"></script>
+  <script>
+    const INPUT = 42
+
+    // DECLARATIVE CODE
+    const { output, buttonFibonacci, buttonSun, buttonExpensive } = init()
+    const worker = new Worker('swiss-army-knife.js')
+    worker.addEventListener('message', showResult)
+
+    function showResult({ data }) {
+      const resultString = `${data.type}: ${data.payload.result}`
+      displayResult(resultString)
+    }
+
+    function getFibonacci() {
+      const number = 41
+      const message = {
+        type: 'CALC_FIBONACCI',
+        payload: {
+          input: number
+        }
+      }
+      worker.postMessage(message)
+    }
+
+    function getSun() {
+      const city = 'Port-Louis'
+      const message = {
+        type: 'GET_SUN',
+        payload: {
+          input: city
+        }
+      }
+      worker.postMessage(message)
+    }
+
+    function getExpensive() {
+      const price = 4000
+      const message = {
+        type: 'EXPENSIVE_REQUEST',
+        payload: {
+          input: price
+        }
+      }
+      worker.postMessage(message)
+    }
+
+    // IMPLEMETATION DETAILS
+    function init() {
+      const output = document.querySelector('.js-output')
+
+      document
+        .querySelectorAll('[class^="js-calc-button"]')
+        .forEach((button) => button.addEventListener('click', clearResult))
+
+      const buttonFibonacci = document.querySelector('.js-calc-button-fibonacci')
+      const buttonSun = document.querySelector('.js-calc-button-sun')
+      const buttonExpensive = document.querySelector('.js-calc-button-expensive')
+
+      buttonFibonacci.addEventListener('click', getFibonacci)
+      buttonSun.addEventListener('click', getSun)
+      buttonExpensive.addEventListener('click', getExpensive)
+
+      return { output, buttonFibonacci, buttonSun, buttonExpensive }
+    }
+
+    function displayResult(result) {
+      output.textContent = result
+    }
+
+    function clearResult() {
+      output.textContent = 'Wating for answer'
+    }
+  </script>
+</body>
+
+</html>

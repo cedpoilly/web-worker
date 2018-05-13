@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Async Expensive Calculations</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <div class="app">
+    <h1 class="title">Async Expensive Calculations</h1>
+    <div class="animated"></div>
+    <div>
+      <button class="js-calc-button-sync calc-button">Sync</button>
+      <button class="js-calc-button-async calc-button">Async</button>
+    </div>
+    <label for="calc-output">Result</label>
+    <p name="calc-output" class="calc-output js-output"></p>
+  </div>
+
+  <script src="expensive.js"></script>
+  <script>
+    // @ts-ignore
+    const { output, buttonSync, buttonAsync } = init()
+
+    // IMPLEMETATION DETAILS
+    function init() {
+      const output = document.querySelector('.js-output')
+
+      document
+        .querySelectorAll('[class^="js-calc-button"]')
+        .forEach((button) => button.addEventListener('click', clearResult))
+
+      const buttonSync = document.querySelector('.js-calc-button-sync')
+      buttonSync.addEventListener('click', syncCalculation)
+
+      const buttonAsync = document.querySelector('.js-calc-button-async')
+      buttonAsync.addEventListener('click', aysncCalculation)
+
+      return { output, buttonSync, buttonAsync }
+    }
+
+    function syncCalculation() {
+      const result = calculate()
+      displayResult(result)
+    }
+
+    function aysncCalculation() {
+      new Promise((resolve) => {
+        const result = calculate()
+
+        const delay = randomDelay()
+        setTimeout(() => { resolve(result) }, delay)
+      })
+        .then(result => displayResult(result))
+    }
+
+    function calculate () {
+      // return 42 - 10 + 5 + 5
+      return expensiveWork(4000)
+    }
+
+    function displayResult(result) {
+      output.textContent = result
+    }
+
+    function clearResult() {
+      output.textContent = 'Wating for answer'
+    }
+    
+    function randomDelay() {
+      return Math.floor(Math.random() * 5) * 1000
+    }
+  </script>
+</body>
+
+</html>
