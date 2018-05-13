@@ -1,0 +1,119 @@
+
+* {
+  box-sizing: border-box !important; 
+}
+:root {
+  font-size: 16px;
+  font-family: sans-serif;
+  --anim-size: 1.5rem;
+  /* --down-scale: 0.3; */
+  /* --up-scale: 9; */
+  --anim-start-pos: 3rem;
+  --anim-end-pos: 3rem;
+}
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.app {
+  justify-content: space-between;
+  flex-basis: 100vh;
+  max-height: 100vh;
+}
+.title {
+  justify-self: start;
+  height: 1.5rem;
+  line-height: 2rem;
+  flex-grow: 1;
+}
+.search-container {
+  flex-grow: 0;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2.0rem;
+}
+
+.output-list {
+  min-width: 100%;
+  height: 75vh;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid teal;
+  flex-grow: 1;
+  justify-self: flex-end;
+}
+.output-list p :nth-child(1) {
+  margin-right: 1rem;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.searchbox {
+  height: 2.0rem;
+  padding: 0.25rem;
+  max-width: 14rem;
+  font-size: 1.125rem;
+  border: none;
+  border-bottom: 0.125rem solid #111;
+  outline: none;
+}
+
+
+.animated {
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  height: var(--anim-size);
+  width: var(--anim-size);
+  margin: 0 auto;
+  background-color: red;
+  /* border-radius: 100%; */
+
+  animation-name: stretch;
+  animation-duration: 2.5s; 
+  animation-timing-function: ease-in; 
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  /* transform: translate3d(var(--anim-start-pos), 0, 0); */
+  will-change: transform;
+  --end-x-pos: calc(100vw - var(--anim-size) - var(--anim-end-pos))
+}
+
+@keyframes stretch {
+  0% {
+    /* transform: scale(var(--down-scale)); */
+    transform: translate3d(var(--anim-start-pos), 0, 0) rotate(-360deg);
+    background-color: red;
+    /* border-radius: 25%; */
+  }
+  50% {
+    background-color: orange;
+    border-radius: 5%;
+  }
+  100% {
+    /* transform: scale(var(--up-scale)); */
+    transform: translate3d(var(--end-x-pos), 0, 0) rotate(360deg);
+    border-radius: 100%;
+    /* background-color: yellow; */
+  }
+}
+.animated {
+  flex-grow: 1;
+  margin-bottom: 5rem;
+}
