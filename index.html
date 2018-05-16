@@ -6,54 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Web Worker Demos</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100vh;
-      margin: 0;
-    }
-
-    body {
-      display: flex;
-      flex-flow: column nowrap;
-      font-size: 16px;
-    }
-
-    .container {
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-between;
-      align-items: center;
-      margin: auto;
-      width: 75%;
-      height: 35%;
-      position: relative;
-      top: -5rem;
-    }
-
-    .page-title {
-      width: 100%;
-      margin: 0 auto 0 auto;
-      font-size: 6rem;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      text-align: center;
-    }
-
-    .section-link {
-      font-size: 3rem;
-      padding: 0 1rem;
-      margin-top: 3rem;
-      font-family: 'Courier New', Courier, monospace;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container">
+  <div class="page">
     <h1 class="page-title">Web Worker Demos</h1>
     <a class="section-link" href="/async-calculation">Is Async Free?</a>
     <a class="section-link" href="/non-blocking">Non Blocking</a>
@@ -62,7 +19,7 @@
   </div>
   <script>
     const PREFIX = window.location.hostname.indexOf('github') > -1
-      ? '/web-worker' : '/code'
+      ? '/web-worker' : ''
 
     window.document.querySelectorAll('.section-link')
       .forEach((element) => {

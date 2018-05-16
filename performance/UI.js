@@ -2,7 +2,7 @@ const output = document.querySelector('.js-output')
 
 export let toggles = {
   worker: true,
-  expensive: true
+  expensive: false
 }
 
 export function initialiseControls() {

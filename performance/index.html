@@ -8,42 +8,21 @@
   <title>Awesome Filtering App!</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="perf.css">
-  <style>
-    .WIP {
-      position: fixed;
-      z-index: 1000;
-      height: 100vh;
-      width: 100vw;
-      background: green;
-      text-align: center;
-    }
-
-    .WIP-title {
-      font-size: 7rem;
-    }
-
-    .WIP-emoji {
-      font-family: sans-serif;
-      font-weight: 100;
-      font-size: 10rem;
-      transform: rotate(90deg);
-    }
-  </style>
 </head>
 
 <body>
-  <div class="app">
+  <div class="app-performance">
     <h1 class="title">Awesome Filtering App!</h1>
 
     <div class="search-container">
-      <input type="text" class="js-searchbox searchbox">
-      <input type="checkbox" name="worker-filter" id="worker-filter" />
-      <label for="worker-filter" onchange="workerFilter = this.value">
-        Filter by Worker </label>
+      <div class="filters">
+        <input type="checkbox" name="worker-filter" id="worker-filter" />
+        <label for="worker-filter"> Filter by Worker </label>
 
-      <input type="checkbox" name="expensive-filter" id="expensive-filter" />
-      <label for="expensive-filter" onchange="toggles.expensive = this.value">
-        Expensive Calculation </label>
+        <input type="checkbox" name="expensive-filter" id="expensive-filter" />
+        <label for="expensive-filter"> Expensive Calculation </label>
+      </div>
+      <input type="text" class="js-searchbox searchbox" placeholder="Search...">
     </div>
 
     <div class="not-animated"></div>

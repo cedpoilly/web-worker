@@ -34,7 +34,7 @@
     worker.addEventListener('message', showResult)
 
     function showResult({ data }) {
-      const resultString = `${data.type}: ${data.payload.result}`
+      const resultString = `${data.type}:\n ${data.payload.result}`
       displayResult(resultString)
     }
 
