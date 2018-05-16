@@ -34,13 +34,13 @@
 
     function aysncCalculation() {
       // new Promise((resolve /*, reject */) => {
-      //     resolve(calculateFibonacci('async'))
+      //     resolve(calculateFibonacci(INPUT, 'async'))
       // })
       // .then(result => displayResult(result))
       setTimeout(() => {
         const result = calculateFibonacci(INPUT, 'async')
         displayResult(result)
-      }, 1000)
+      })
     }
 
     // IMPLEMETATION DETAILS
