@@ -23,7 +23,7 @@
 
   <script src="fibonacci.js"></script>
   <script>
-    const INPUT = 43
+    const INPUT = 42
 
     const { output, buttonSync, buttonAsync } = init()
 
@@ -38,9 +38,9 @@
       // })
       // .then(result => displayResult(result))
       setTimeout(() => {
-        const result = calculateFibonacci('async')
+        const result = calculateFibonacci(INPUT, 'async')
         displayResult(result)
-      })
+      }, 1000)
     }
 
     // IMPLEMETATION DETAILS
