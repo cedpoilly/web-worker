@@ -15,8 +15,6 @@
 
     <div class="animated"></div>
 
-    <h1 class="title">Awesome Fibonacci Calculator!</h1>
-    ...
     <div class="actions">
       <button class="js-calc-button-main calc-button">Main Thread</button>
       <button class="js-calc-button-worker calc-button">Worker</button>
@@ -36,16 +34,6 @@
     function calculateOnMainThread() {
       const result = calculateFibonacci(INPUT, 'MAIN')
       displayResult(result)
-    }
-
-    function askWorker() {
-      worker.postMessage(INPUT)
-
-      worker.addEventListener('message', showResult)
-
-      function showResult(event) {
-        displayResult(event.data)
-      }
     }
 
     function askWorker() {
